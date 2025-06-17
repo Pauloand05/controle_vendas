@@ -1,11 +1,15 @@
 package com.meuprojeto.controlevendas.controller;
 
+import com.meuprojeto.controlevendas.dto.VendaRequestDto;
 import com.meuprojeto.controlevendas.model.Venda;
 import com.meuprojeto.controlevendas.service.VendaService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/vendas")
@@ -18,9 +22,9 @@ public class VendaController {
     }
 
     @PostMapping
-    public ResponseEntity<Venda> criarVenda(@RequestBody Venda venda) {
-        Venda salva = vendaService.salvarVenda(venda);
-        return ResponseEntity.ok(salva);
+    public ResponseEntity<Venda> criarVenda(@Valid @RequestBody VendaRequestDto vendaRequest) {
+        Venda vendaSalva = vendaService.salvarVenda(vendaRequest.getProdutoId(), vendaRequest.getQuantidadeVendida());
+        return ResponseEntity.ok(vendaSalva);
     }
 
     @GetMapping

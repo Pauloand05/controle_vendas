@@ -1,177 +1,246 @@
-# 📊 Sistema de Controle de Vendas
+# 🛒 Sistema de Controle de Vendas - Frontend
 
-Um sistema web moderno e responsivo para controle e análise de vendas, desenvolvido com Next.js 15, TypeScript e Tailwind CSS.
+Um sistema frontend moderno desenvolvido em React com TypeScript para gerenciamento de produtos e controle de vendas.
 
-![Sistema de Controle de Vendas](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)
-![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![React](https://img.shields.io/badge/React-18.x-blue.svg)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.x-38B2AC.svg)
+![Next.js](https://img.shields.io/badge/Next.js-14.x-black.svg)
+
+## 📋 Índice
+
+- [Sobre o Projeto](#sobre-o-projeto)
+- [Funcionalidades](#funcionalidades)
+- [Tecnologias Utilizadas](#tecnologias-utilizadas)
+- [Pré-requisitos](#pré-requisitos)
+- [Instalação](#instalação)
+- [Como Usar](#como-usar)
+- [Estrutura do Projeto](#estrutura-do-projeto)
+- [API Endpoints](#api-endpoints)
+- [Screenshots](#screenshots)
+- [Contribuição](#contribuição)
+- [Licença](#licença)
+
+## 🎯 Sobre o Projeto
+
+O Sistema de Controle de Vendas é uma aplicação web que permite gerenciar produtos e registrar vendas de forma simples e intuitiva. O sistema oferece uma interface moderna e responsiva para cadastro de produtos, visualização de inventário e registro de vendas.
+
+### Principais Características:
+- ✅ Interface moderna e responsiva
+- ✅ Gerenciamento completo de produtos
+- ✅ Registro de vendas com cálculos automáticos
+- ✅ Formatação de moeda brasileira (R$)
+- ✅ Tratamento de erros robusto
+- ✅ Feedback visual para todas as ações
 
 ## 🚀 Funcionalidades
 
-### ✨ Principais Recursos
-- **Formulário Intuitivo**: Interface limpa para inserção de dados de vendas
-- **Cálculos Automáticos**: Processamento em tempo real de métricas de lucro
-- **Design Responsivo**: Adaptação perfeita para desktop e mobile
-- **API REST**: Endpoint preparado para integração com banco de dados
-- **Validação de Dados**: Validação completa dos campos do formulário
+### 📦 Gerenciamento de Produtos
+- **Cadastro de Produtos**: Formulário para adicionar novos produtos com nome, custo unitário e preço de venda
+- **Listagem de Produtos**: Visualização de todos os produtos cadastrados em formato de tabela
+- **Exclusão de Produtos**: Remoção de produtos com confirmação
+- **Formatação de Preços**: Exibição de valores em formato de moeda brasileira
 
-### 📈 Métricas Calculadas
-- **Lucro por Unidade**: Diferença entre preço de venda e custo
-- **Lucro Total**: Lucro por unidade multiplicado pela quantidade
-- **Valor a Reinvestir**: Custo total dos produtos vendidos
-- **Lucro Líquido**: Lucro real após descontar o valor de reinvestimento
+### 💰 Controle de Vendas
+- **Registro de Vendas**: Formulário para registrar vendas selecionando produto e quantidade
+- **Cálculo Automático**: Preview do valor total da venda em tempo real
+- **Validação de Dados**: Verificação de campos obrigatórios e valores válidos
 
-### 🎨 Design
-- **Cores**: Paleta em tons de verde e azul
-- **Layout**: Design moderno com gradientes e efeitos visuais
-- **Responsividade**: Interface adaptativa para todos os dispositivos
-- **UX**: Indicadores visuais dinâmicos baseados nos resultados
+### 🎨 Interface do Usuário
+- **Design Responsivo**: Adaptação automática para desktop e mobile
+- **Navegação por Abas**: Interface organizada com abas para produtos e vendas
+- **Feedback Visual**: Mensagens de sucesso, erro e estados de carregamento
+- **Tema Moderno**: Design limpo com cores em tons de verde e azul
 
-## 🛠️ Tecnologias Utilizadas
+## 🛠 Tecnologias Utilizadas
 
-- **Framework**: Next.js 15 (App Router)
-- **Linguagem**: TypeScript
-- **Estilização**: Tailwind CSS
-- **Componentes**: shadcn/ui
-- **Ícones**: Lucide React
-- **Validação**: Validação nativa do HTML5
+- **[React 18](https://reactjs.org/)** - Biblioteca JavaScript para construção de interfaces
+- **[TypeScript](https://www.typescriptlang.org/)** - Superset do JavaScript com tipagem estática
+- **[Next.js 14](https://nextjs.org/)** - Framework React para produção
+- **[Tailwind CSS](https://tailwindcss.com/)** - Framework CSS utilitário
+- **[Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)** - Para comunicação com a API REST
 
 ## 📋 Pré-requisitos
 
-- Node.js 18+ 
-- npm, yarn ou pnpm
+Antes de começar, certifique-se de ter instalado:
 
-## ⚡ Instalação e Execução
+- **Node.js** (versão 18.x ou superior)
+- **npm** ou **yarn**
+- **Backend da API** rodando em `http://localhost:8080`
 
-### 1. Clone o repositório
-```bash
-git clone <url-do-repositorio>
-cd sistema-controle-vendas
-```
+## 🔧 Instalação
 
-### 2. Instale as dependências
-```bash
-npm install
-# ou
-yarn install
-# ou
-pnpm install
-```
+1. **Clone o repositório**
+   \`\`\`bash
+   git clone https://github.com/seu-usuario/sales-control-frontend.git
+   cd sales-control-frontend
+   \`\`\`
 
-### 3. Execute o projeto
-```bash
-npm run dev
-# ou
-yarn dev
-# ou
-pnpm dev
-```
+2. **Instale as dependências**
+   \`\`\`bash
+   npm install
+   # ou
+   yarn install
+   \`\`\`
 
-### 4. Acesse a aplicação
-Abra [http://localhost:3000](http://localhost:3000) no seu navegador.
+3. **Configure as variáveis de ambiente** (opcional)
+   \`\`\`bash
+   cp .env.example .env.local
+   \`\`\`
+   
+   Edite o arquivo `.env.local` se necessário:
+   \`\`\`env
+   NEXT_PUBLIC_API_URL=http://localhost:8080
+   \`\`\`
+
+4. **Execute o projeto**
+   \`\`\`bash
+   npm run dev
+   # ou
+   yarn dev
+   \`\`\`
+
+5. **Acesse a aplicação**
+   
+   Abra [http://localhost:3000](http://localhost:3000) no seu navegador.
+
+## 📖 Como Usar
+
+### 1. Cadastrando Produtos
+
+1. Acesse a aba **"Produtos"**
+2. Preencha o formulário com:
+   - Nome do produto
+   - Custo unitário (em reais)
+   - Preço de venda (em reais)
+3. Clique em **"Cadastrar Produto"**
+4. O produto aparecerá automaticamente na lista
+
+### 2. Registrando Vendas
+
+1. Acesse a aba **"Vendas"**
+2. Selecione um produto no dropdown
+3. Informe a quantidade vendida
+4. Visualize o resumo da venda
+5. Clique em **"Registrar Venda"**
+
+### 3. Gerenciando Produtos
+
+- **Visualizar**: Todos os produtos aparecem na tabela da aba "Produtos"
+- **Deletar**: Clique em "Deletar" na linha do produto desejado
 
 ## 📁 Estrutura do Projeto
 
-```
-sistema-controle-vendas/
-├── app/
-│   ├── api/
-│   │   └── vendas/
-│   │       └── route.ts          # API endpoint para vendas
-│   ├── components/
-│   │   └── results-display.tsx   # Componente de exibição de resultados
-│   ├── globals.css               # Estilos globais
-│   ├── layout.tsx               # Layout principal
-│   └── page.tsx                 # Página principal
-├── components/
-│   └── ui/                      # Componentes shadcn/ui
-├── lib/
-│   └── utils.ts                 # Utilitários
-├── tailwind.config.ts           # Configuração do Tailwind
-├── next.config.mjs              # Configuração do Next.js
-└── package.json
-```
+\`\`\`
+src/
+├── components/           # Componentes React
+│   ├── ProdutoForm.tsx  # Formulário de cadastro de produtos
+│   ├── ProdutoList.tsx  # Lista de produtos
+│   └── VendaForm.tsx    # Formulário de registro de vendas
+├── services/            # Serviços de API
+│   └── api.ts          # Funções para comunicação com backend
+├── types/              # Definições de tipos TypeScript
+│   └── index.ts        # Interfaces Produto e Venda
+└── App.tsx             # Componente principal da aplicação
+\`\`\`
 
-## 🔧 Como Usar
+## 🔌 API Endpoints
 
-### 1. Preenchimento do Formulário
-- **Nome do Produto**: Digite o nome do produto vendido
-- **Custo por Unidade**: Insira o custo de cada unidade (R\$)
-- **Preço de Venda**: Defina o preço de venda por unidade (R\$)
-- **Quantidade Vendida**: Informe quantas unidades foram vendidas
+O frontend consome os seguintes endpoints do backend:
 
-### 2. Cálculo dos Resultados
-Clique em "Calcular Lucro" para processar os dados e visualizar:
-- Lucro por unidade
-- Lucro total da venda
-- Valor necessário para reinvestir
-- Lucro líquido final
+### Produtos
+- `GET /produtos` - Lista todos os produtos
+- `POST /produtos` - Cria um novo produto
+- `GET /produtos/{id}` - Busca produto por ID
+- `DELETE /produtos/{id}` - Deleta um produto
 
-### 3. Análise Visual
-Os resultados são exibidos com:
-- **Cores dinâmicas**: Verde para lucro, vermelho para prejuízo
-- **Cards informativos**: Cada métrica em seu próprio card
-- **Resumo detalhado**: Análise completa da venda
+### Vendas
+- `POST /vendas` - Registra uma nova venda
 
-## 🌐 API Endpoints
+### Exemplo de Payload
 
-### POST /api/vendas
-Endpoint para registrar uma nova venda.
-
-**Body:**
-```json
+**Criar Produto:**
+\`\`\`json
 {
-  "nomeProduto": "string",
-  "custoPorUnidade": "number",
-  "precoVendaPorUnidade": "number",
-  "quantidadeVendida": "number",
-  "lucroPorUnidade": "number",
-  "lucroTotal": "number",
-  "valorReinvestir": "number",
-  "lucroLiquido": "number"
+  "nome": "Produto Exemplo",
+  "custoUnitario": 10.50,
+  "precoVenda": 15.00
 }
-```
+\`\`\`
 
-**Response:**
-```json
+**Registrar Venda:**
+\`\`\`json
 {
-  "success": true,
-  "message": "Venda registrada com sucesso!",
-  "data": { ... }
+  "produtoId": 1,
+  "quantidadeVendida": 5
 }
-```
+\`\`\`
 
-## 🎯 Próximas Funcionalidades
+## 📱 Screenshots
 
-- [ ] **Banco de Dados**: Integração com Supabase/PostgreSQL
-- [ ] **Autenticação**: Sistema de login e usuários
-- [ ] **Histórico**: Lista de vendas anteriores
-- [ ] **Relatórios**: Geração de relatórios em PDF
-- [ ] **Gráficos**: Visualização de dados com charts
-- [ ] **Dashboard**: Painel com métricas consolidadas
-- [ ] **Exportação**: Export para Excel/CSV
-- [ ] **Filtros**: Busca e filtros por período/produto
+### Desktop
+- Interface principal com navegação por abas
+- Formulários responsivos e intuitivos
+- Tabelas organizadas com formatação de moeda
+
+### Mobile
+- Layout adaptado para dispositivos móveis
+- Formulários otimizados para toque
+- Navegação simplificada
 
 ## 🤝 Contribuição
 
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
+Contribuições são sempre bem-vindas! Para contribuir:
+
+1. **Fork** o projeto
+2. Crie uma **branch** para sua feature (`git checkout -b feature/AmazingFeature`)
+3. **Commit** suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. **Push** para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um **Pull Request**
+
+### Padrões de Código
+
+- Use **TypeScript** para type safety
+- Siga as convenções do **ESLint** e **Prettier**
+- Escreva **testes** para novas funcionalidades
+- Documente **mudanças significativas**
+
+## 🐛 Reportando Bugs
+
+Encontrou um bug? Abra uma [issue](https://github.com/seu-usuario/sales-control-frontend/issues) com:
+
+- Descrição detalhada do problema
+- Passos para reproduzir
+- Screenshots (se aplicável)
+- Informações do ambiente (OS, browser, etc.)
+
+## 📝 Roadmap
+
+- [ ] Implementar autenticação de usuários
+- [ ] Adicionar relatórios de vendas
+- [ ] Implementar paginação na listagem
+- [ ] Adicionar filtros e busca
+- [ ] Criar dashboard com gráficos
+- [ ] Implementar modo escuro
+- [ ] Adicionar exportação de dados
+- [ ] Implementar notificações push
 
 ## 📄 Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-## 👨‍💻 Autor
+---
 
-Desenvolvido por Paulo Alves.
+## 👨‍💻 Desenvolvedor
+
+Desenvolvido com ❤️ por [Seu Nome](https://github.com/seu-usuario)
+
+### 📞 Contato
+
+- **Email**: seu.email@exemplo.com
+- **LinkedIn**: [Seu LinkedIn](https://linkedin.com/in/seu-perfil)
+- **GitHub**: [Seu GitHub](https://github.com/seu-usuario)
 
 ---
 
-## 📞 Suporte
-
-Se você encontrar algum problema ou tiver sugestões, por favor:
-- Abra uma [issue](../../issues)
-- Entre em contato através do email: [pauloandre050619@gmail.com]
+⭐ **Se este projeto te ajudou, considere dar uma estrela!** ⭐

@@ -7,14 +7,11 @@ import com.meuprojeto.controlevendas.repository.VendaRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class VendaService {
-
-
     private final VendaRepository vendaRepository;
     private final ProdutoRepository produtoRepository;
 
@@ -23,29 +20,29 @@ public class VendaService {
         this.produtoRepository = produtoRepository;
     }
 
-    public Venda salvarVenda(Venda venda) {
-        // Busca o produto completo do banco de dados
-        Produto produto = produtoRepository.findById(venda.getProduto().getId())
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado com ID: " + venda.getProduto().getId()));
+    public Venda salvarVenda(Long produtoId, Integer quantidadeVendida) {
+        Produto produto = produtoRepository.findById(produtoId)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
 
-        // Garante que a venda terá o produto completo
+        BigDecimal precoVenda = produto.getPrecoVenda();
+        BigDecimal custoUnitario = produto.getCustoUnitario();
+
+        BigDecimal lucroUnitario = precoVenda.subtract(custoUnitario);
+        BigDecimal lucroTotal = lucroUnitario.multiply(BigDecimal.valueOf(quantidadeVendida));
+
+        BigDecimal custoTotal = custoUnitario.multiply(BigDecimal.valueOf(quantidadeVendida));
+        BigDecimal valorReinvestir = custoTotal;
+
+        // Exemplo de cálculo simples para lucro líquido (pode ajustar a regra conforme necessário)
+        BigDecimal lucroLiquido = lucroTotal;
+
+        Venda venda = new Venda();
         venda.setProduto(produto);
-
-        // Cálculos automáticos
-        BigDecimal lucroUnitario = produto.getPrecoVenda().subtract(produto.getCustoUnitario());
-        BigDecimal lucroTotal = lucroUnitario.multiply(BigDecimal.valueOf(venda.getQuantidadeVendida()));
-        BigDecimal percentualReinvestir = new BigDecimal("0.30");
-        BigDecimal valorReinvestir = lucroTotal.multiply(percentualReinvestir);
-        BigDecimal lucroLiquido = lucroTotal.subtract(valorReinvestir);
-
+        venda.setQuantidadeVendida(quantidadeVendida);
         venda.setLucroUnitario(lucroUnitario);
         venda.setLucroTotal(lucroTotal);
         venda.setValorReinvestir(valorReinvestir);
-        venda.setLucroLiquido(lucroLiquido);
-
-        if (venda.getDataVenda() == null) {
-            venda.setDataVenda(LocalDateTime.now());
-        }
+        venda.setLucroLiquido(lucroLiquido);  // <-- seta o lucro líquido
 
         return vendaRepository.save(venda);
     }

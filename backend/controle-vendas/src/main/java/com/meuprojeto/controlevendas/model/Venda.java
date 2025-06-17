@@ -1,7 +1,6 @@
 package com.meuprojeto.controlevendas.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,26 +20,26 @@ public class Venda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER) // busca rápida para usar dados do produto na venda
+    @ManyToOne
     @JoinColumn(name = "produto_id", nullable = false)
-    @JsonIgnoreProperties("venda")
     private Produto produto;
 
-    @Column(name = "quantidade_vendida", nullable = false)
+    @Column(nullable = false)
     private Integer quantidadeVendida;
 
-    @Column(name = "lucro_unitario", nullable = false, precision = 10, scale = 2)
+    @Column(name = "lucro_unitario", nullable = false)
     private BigDecimal lucroUnitario;
 
-    @Column(name = "lucro_total", nullable = false, precision = 10, scale = 2)
+    @Column(name = "lucro_total", nullable = false)
     private BigDecimal lucroTotal;
 
-    @Column(name = "valor_reinvestir", nullable = false, precision = 10, scale = 2)
+    @Column(name = "valor_reinvestir", nullable = false)
     private BigDecimal valorReinvestir;
 
-    @Column(name = "lucro_liquido", nullable = false, precision = 10, scale = 2)
+    @Column(name = "lucro_liquido", nullable = false)
     private BigDecimal lucroLiquido;
 
-    @Column(name = "data_venda", nullable = false)
-    private LocalDateTime dataVenda;
+    // Exemplo de campo opcional para data da venda
+    // @Column(name = "data_venda")
+    // private LocalDateTime dataVenda;
 }
