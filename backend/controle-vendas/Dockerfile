@@ -2,16 +2,21 @@
 FROM amazoncorretto:17 AS builder
 
 WORKDIR /app
-COPY .mvn .mvn
+
+# 1. Copia primeiro os arquivos essenciais
+COPY .mvn/wrapper .mvn/wrapper
 COPY mvnw pom.xml ./
 
-# Força permissões Unix e instala JDK
-RUN microdnf install dos2unix -y && \
+# 2. Pré-configuração (crucial para Windows)
+RUN apt-get update && apt-get install -y dos2unix && \
     dos2unix mvnw && \
     chmod +x mvnw && \
-    ./mvnw dependency:go-offline -B
+    ./mvnw --version
 
+# 3. Copia o código fonte
 COPY src src
+
+# 4. Build do projeto
 RUN ./mvnw clean package -DskipTests
 
 # Estágio de execução
