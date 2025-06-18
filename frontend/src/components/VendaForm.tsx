@@ -5,7 +5,11 @@ import { useState, useEffect } from "react"
 import { ApiService } from "../services/api"
 import type { Produto, Venda } from "../types"
 
-export const VendaForm: React.FC = () => {
+type Props = {
+  onVendaCreated?: () => void
+}
+
+export const VendaForm: React.FC<Props> = ({ onVendaCreated }) => {
   const [produtos, setProdutos] = useState<Produto[]>([])
   const [formData, setFormData] = useState({
     produtoId: "",
@@ -35,7 +39,7 @@ export const VendaForm: React.FC = () => {
     }))
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
     setMessage(null)
@@ -57,6 +61,11 @@ export const VendaForm: React.FC = () => {
 
       setFormData({ produtoId: "", quantidadeVendida: "" })
       setMessage({ type: "success", text: "✅ Venda registrada com sucesso!" })
+
+      // Notifica o componente pai (App.tsx)
+      if (onVendaCreated) {
+        onVendaCreated()
+      }
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "Erro desconhecido"
       setMessage({ type: "error", text: `❌ ${errorMessage}` })
@@ -64,6 +73,7 @@ export const VendaForm: React.FC = () => {
       setLoading(false)
     }
   }
+
 
   const selectedProduto = produtos.find((p) => p.id === Number.parseInt(formData.produtoId))
   const quantidade = Number.parseInt(formData.quantidadeVendida) || 0

@@ -1,6 +1,6 @@
 package com.meuprojeto.controlevendas.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,7 +39,7 @@ public class Venda {
     @Column(name = "lucro_liquido", nullable = false)
     private BigDecimal lucroLiquido;
 
-    // Exemplo de campo opcional para data da venda
-    // @Column(name = "data_venda")
-    // private LocalDateTime dataVenda;
+    @Column(name = "data_venda", nullable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime dataVenda;
 }

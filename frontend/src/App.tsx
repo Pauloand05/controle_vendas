@@ -4,12 +4,17 @@ import { useState } from "react"
 import { ProdutoForm } from "./components/ProdutoForm"
 import { ProdutoList } from "./components/ProdutoList"
 import { VendaForm } from "./components/VendaForm"
+import { VendaList } from "./components/VendaList" // <-- importar VendaList
 
 function App() {
   const [activeTab, setActiveTab] = useState<"produtos" | "vendas">("produtos")
   const [refreshTrigger, setRefreshTrigger] = useState(0)
 
   const handleProdutoCreated = () => {
+    setRefreshTrigger((prev) => prev + 1)
+  }
+
+  const handleVendaCreated = () => {
     setRefreshTrigger((prev) => prev + 1)
   }
 
@@ -86,7 +91,8 @@ function App() {
             </div>
           ) : (
             <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
-              <VendaForm />
+              <VendaForm onVendaCreated={handleVendaCreated} />
+              <VendaList refreshTrigger={refreshTrigger} />
             </div>
           )}
         </main>

@@ -7,6 +7,7 @@ import com.meuprojeto.controlevendas.repository.VendaRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,13 +29,15 @@ public class VendaService {
         BigDecimal custoUnitario = produto.getCustoUnitario();
 
         BigDecimal lucroUnitario = precoVenda.subtract(custoUnitario);
-        BigDecimal lucroTotal = lucroUnitario.multiply(BigDecimal.valueOf(quantidadeVendida));
 
-        BigDecimal custoTotal = custoUnitario.multiply(BigDecimal.valueOf(quantidadeVendida));
-        BigDecimal valorReinvestir = custoTotal;
+        // Novo cálculo do lucro total = preço de venda * quantidade vendida
+        BigDecimal lucroTotal = precoVenda.multiply(BigDecimal.valueOf(quantidadeVendida));
 
-        // Exemplo de cálculo simples para lucro líquido (pode ajustar a regra conforme necessário)
-        BigDecimal lucroLiquido = lucroTotal;
+        // Valor a reinvestir = custo unitário * quantidade vendida
+        BigDecimal valorReinvestir = custoUnitario.multiply(BigDecimal.valueOf(quantidadeVendida));
+
+        // Lucro líquido = lucro total - valor a reinvestir
+        BigDecimal lucroLiquido = lucroTotal.subtract(valorReinvestir);
 
         Venda venda = new Venda();
         venda.setProduto(produto);
@@ -42,7 +45,8 @@ public class VendaService {
         venda.setLucroUnitario(lucroUnitario);
         venda.setLucroTotal(lucroTotal);
         venda.setValorReinvestir(valorReinvestir);
-        venda.setLucroLiquido(lucroLiquido);  // <-- seta o lucro líquido
+        venda.setLucroLiquido(lucroLiquido);
+        venda.setDataVenda(LocalDateTime.now());
 
         return vendaRepository.save(venda);
     }
