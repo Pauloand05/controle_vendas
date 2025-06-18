@@ -1,11 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  trailingSlash: true,  // Adiciona barras no final das URLs
+  trailingSlash: true,
   images: { 
-    unoptimized: true   // Desativa otimização de imagens para export
+    unoptimized: true 
   },
-  // Remova TODAS as configurações de basePath e assetPrefix temporariamente
+  env: {
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+  }
 };
-
 export default nextConfig;
