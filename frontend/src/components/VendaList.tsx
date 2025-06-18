@@ -24,7 +24,7 @@ export function VendaList({ refreshTrigger }: Props) {
   const [vendas, setVendas] = useState<Venda[]>([])
 
   useEffect(() => {
-    axios.get('http://localhost:8080/vendas')
+    axios.get('https://controle-vendas-1.onrender.com/vendas')
       .then(response => setVendas(response.data))
       .catch(error => console.error('Erro ao buscar vendas:', error))
   }, [refreshTrigger])
