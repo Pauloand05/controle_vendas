@@ -1,17 +1,10 @@
-# Usa imagem do JDK
-FROM openjdk:21-jdk
-
-# Diretório de trabalho dentro do container
+FROM amazoncorretto:17-alpine AS build
 WORKDIR /app
-
-# Copia o projeto
 COPY . .
-
-# Compila o projeto com Maven
 RUN ./mvnw clean package -DskipTests
 
-# Expõe a porta padrão do Spring Boot
+FROM amazoncorretto:17-alpine
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
-
-# Executa o JAR
-CMD ["java", "-jar", "target/controle-vendas-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
