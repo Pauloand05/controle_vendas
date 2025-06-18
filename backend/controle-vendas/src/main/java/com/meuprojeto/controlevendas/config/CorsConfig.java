@@ -13,9 +13,15 @@ public class CorsConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
+                // Configuração global
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:3000") // endereço do seu front
+                        .allowedOrigins("http://localhost:3000", "https://controle-vendas-frontend.onrender.com")
                         .allowedMethods("GET", "POST", "PUT", "DELETE");
+
+                // Configuração específica para health check (opcional)
+                registry.addMapping("/health")
+                        .allowedOrigins("*")
+                        .allowedMethods("GET");
             }
         };
     }

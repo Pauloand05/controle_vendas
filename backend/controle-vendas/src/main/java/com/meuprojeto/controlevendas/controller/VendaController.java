@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = {"https://seu-frontend-no-render.onrender.com", "http://localhost:3000"})
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/vendas")
 public class VendaController {
