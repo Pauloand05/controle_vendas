@@ -233,13 +233,13 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 ## 👨‍💻 Desenvolvedor
 
-Desenvolvido com ❤️ por [Seu Nome](https://github.com/seu-usuario)
+Desenvolvido por [Paulo Alves](https://github.com/Pauloand05/controle_vendas)
 
 ### 📞 Contato
 
-- **Email**: seu.email@exemplo.com
-- **LinkedIn**: [Seu LinkedIn](https://linkedin.com/in/seu-perfil)
-- **GitHub**: [Seu GitHub](https://github.com/seu-usuario)
+- **Email**: pauloandre0506192gmail.com
+- **LinkedIn**: [Paulo Alves](https://www.linkedin.com/in/paulo-andr%C3%A9-alves-6486ba268/)
+- **GitHub**: [Paulo Alves](https://github.com/Pauloand05)
 
 ---
 
