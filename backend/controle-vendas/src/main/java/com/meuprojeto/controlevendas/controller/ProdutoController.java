@@ -2,6 +2,8 @@ package com.meuprojeto.controlevendas.controller;
 
 import com.meuprojeto.controlevendas.model.Produto;
 import com.meuprojeto.controlevendas.service.ProdutoService;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,8 +39,21 @@ public class ProdutoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarProduto(@PathVariable Long id) {
-        produtoService.deletar(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<?> deletarProduto(@PathVariable Long id) {
+        try {
+            produtoService.deletar(id);
+            return ResponseEntity.noContent().build();
+        } catch (DataIntegrityViolationException e) {
+            // Captura primeiro a exceção mais específica
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("Não foi possível excluir - há registros vinculados");
+        } catch (RuntimeException e) {
+            // Depois a mais genérica
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            // Por último qualquer outra exceção
+            return ResponseEntity.internalServerError()
+                    .body("Erro ao excluir produto");
+        }
     }
 }

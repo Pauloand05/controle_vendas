@@ -33,7 +33,9 @@ public class Produto {
     private BigDecimal precoVenda;
 
     // Opcional: uma lista de vendas associadas a esse produto
-    @OneToMany(mappedBy = "produto")
+    @OneToMany(mappedBy = "produto",
+            cascade = CascadeType.ALL,  // Adicionado
+            orphanRemoval = true)
     @JsonIgnore
     private List<Venda> vendas;
 }

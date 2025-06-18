@@ -2,6 +2,7 @@ package com.meuprojeto.controlevendas.service;
 
 import com.meuprojeto.controlevendas.model.Produto;
 import com.meuprojeto.controlevendas.repository.ProdutoRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +29,14 @@ public class ProdutoService {
         return produtoRepository.findById(id);
     }
 
+    @Transactional
     public void deletar(Long id) {
-        produtoRepository.deleteById(id);
+        Produto produto = produtoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+
+        // Limpa as vendas associadas (orphanRemoval fará o delete automático)
+        produto.getVendas().clear();
+
+        produtoRepository.delete(produto);
     }
 }
