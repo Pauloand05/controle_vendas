@@ -1,6 +1,6 @@
 import type { Produto, Venda } from "../types"
 
-const API_BASE_URL = "http://localhost:8080"
+const API_BASE_URL = "https://controle-vendas-1.onrender.com/"
 
 export class ApiService {
   private static async handleResponse<T>(response: Response): Promise<T> {
