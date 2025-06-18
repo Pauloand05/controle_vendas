@@ -1,24 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: { ignoreDuringBuilds: true },
-  typescript: { ignoreBuildErrors: true },
-  images: { unoptimized: true },
-  
-  // Adicione esta seção:
-  env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
-    NEXT_PUBLIC_ENV: process.env.NEXT_PUBLIC_ENV || 'development'
+  output: 'export',
+  trailingSlash: true,  // Adiciona barras no final das URLs
+  images: { 
+    unoptimized: true   // Desativa otimização de imagens para export
   },
-  
-  // Opcional (para CORS):
-  async headers() {
-    return [
-      {
-        source: '/api/:path*',
-        headers: [
-          { key: 'Access-Control-Allow-Origin', value: '*' }
-        ]
-      }
-    ]
-  }
-}
+  // Remova TODAS as configurações de basePath e assetPrefix temporariamente
+};
+
+export default nextConfig;
