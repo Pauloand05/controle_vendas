@@ -1,53 +1,32 @@
 version: '3.8'
 
 services:
+  backend:
+    build: ./backend/controle-vendas
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/controle_vendas
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin123
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:8080
+
   postgres:
     image: postgres:15-alpine
-    container_name: controle_vendas_db
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin123
       POSTGRES_DB: controle_vendas
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-    networks:
-      - vendas-network
-
-  backend:
-    build:
-      context: ./backend/controle-vendas
-      dockerfile: Dockerfile
-    container_name: controle_vendas_api
-    depends_on:
-      - postgres
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/controle_vendas
-      SPRING_DATASOURCE_USERNAME: admin
-      SPRING_DATASOURCE_PASSWORD: admin123
-      SPRING_JPA_HIBERNATE_DDL-AUTO: update
-    ports:
-      - "8080:8080"
-    networks:
-      - vendas-network
-    restart: unless-stopped
-
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: controle_vendas_front
-    ports:
-      - "3000:3000"
-    networks:
-      - vendas-network
-    depends_on:
-      - backend
 
 volumes:
   postgres_data:
-
-networks:
-  vendas-network:
-    driver: bridge
