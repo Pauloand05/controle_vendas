@@ -1,39 +1,53 @@
-version: "3.8"
+version: '3.8'
 
 services:
-  mysql:
-    image: mysql:8.0
-    container_name: mysql
-    restart: always
+  postgres:
+    image: postgres:15-alpine
+    container_name: controle_vendas_db
     environment:
-      MYSQL_DATABASE: controlevendas
-      MYSQL_ROOT_PASSWORD: root
-    ports:
-      - "3307:3306"
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: controle_vendas
     volumes:
-      - mysql_data:/var/lib/mysql
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - vendas-network
 
   backend:
-    build: ./backend/controle-vendas
-    container_name: backend
-    restart: always
+    build:
+      context: ./backend/controle-vendas
+      dockerfile: Dockerfile
+    container_name: controle_vendas_api
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/controle_vendas
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin123
+      SPRING_JPA_HIBERNATE_DDL-AUTO: update
     ports:
       - "8080:8080"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/controlevendas
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: root
-    depends_on:
-      - mysql
+    networks:
+      - vendas-network
+    restart: unless-stopped
 
   frontend:
-    build: ./frontend
-    container_name: frontend
-    restart: always
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: controle_vendas_front
     ports:
       - "3000:3000"
+    networks:
+      - vendas-network
     depends_on:
       - backend
 
 volumes:
-  mysql_data:
+  postgres_data:
+
+networks:
+  vendas-network:
+    driver: bridge
